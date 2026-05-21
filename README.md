@@ -34,7 +34,7 @@ An internal tech issue and feature tracker for development teams. Contributors c
 ### Installation
 
 ```bash
-git clone https://github.com/Sakebul-islam/Assignment-2.git
+git clone https://github.com/YOUR_USERNAME/devpulse.git
 cd devpulse/backend
 npm install
 ```
@@ -49,7 +49,7 @@ DB_URL=postgresql://USER:PASSWORD@HOST/DATABASE?sslmode=require
 JWT_SECRET=your_jwt_secret_here
 ```
 
-### Run (developments)
+### Run (development)
 
 ```bash
 npm run dev
