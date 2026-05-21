@@ -4,10 +4,9 @@
   "description": "DevPulse - Internal tech issue and feature tracker",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch ./src/server.ts",
-    "dev:nodemon": "nodemon --exec tsx src/server.ts --ext ts,json --watch src",
-    "build": "tsc",
     "start": "node dist/server.js",
+    "dev": "tsx watch ./src/server.ts",
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
