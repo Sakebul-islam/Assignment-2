@@ -49,7 +49,7 @@ DB_URL=postgresql://USER:PASSWORD@HOST/DATABASE?sslmode=require
 JWT_SECRET=your_jwt_secret_here
 ```
 
-### Run (development)
+### Run (developments)
 
 ```bash
 npm run dev
