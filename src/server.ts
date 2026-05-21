@@ -13,3 +13,6 @@ const main = async () => {
 };
 
 main();
+
+// Required for Vercel serverless — @vercel/node needs a default export
+export default app;
