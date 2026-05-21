@@ -34,7 +34,7 @@ An internal tech issue and feature tracker for development teams. Contributors c
 ### Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/devpulse.git
+git clone https://github.com/Sakebul-islam/Assignment-2.git
 cd devpulse/backend
 npm install
 ```
