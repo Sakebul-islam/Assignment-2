@@ -32,4 +32,10 @@ const sendResponse = <T>(res: Response, payload: TResponse<T>) => {
   }
 };
 
+export const handleControllerError = (res: Response, error: unknown): void => {
+  const statusCode = (error as { statusCode?: number }).statusCode ?? 500;
+  const message = error instanceof Error ? error.message : "Internal Server Error";
+  sendResponse(res, { statusCode, success: false, message });
+};
+
 export default sendResponse;

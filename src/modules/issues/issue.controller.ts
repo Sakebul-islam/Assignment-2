@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { issueService } from "./issue.service.js";
-import sendResponse from "../../utility/sendResponse.js";
+import sendResponse, { handleControllerError } from "../../utility/sendResponse.js";
 import {
   IssueStatusEnum,
   IssueTypeEnum,
@@ -12,11 +12,18 @@ import { UserRoleEnum } from "../auth/auth.interface.js";
 const getAllIssues = async (req: Request, res: Response) => {
   try {
     const { sort, type, status } = req.query as {
-      sort?: "newest" | "oldest";
+      sort?: string;
       type?: IssueType;
       status?: IssueStatus;
     };
 
+    if (sort && sort !== "newest" && sort !== "oldest") {
+      return sendResponse(res, {
+        statusCode: 400,
+        success: false,
+        message: "sort must be one of: newest, oldest",
+      });
+    }
     if (type && !Object.values(IssueTypeEnum).includes(type)) {
       return sendResponse(res, {
         statusCode: 400,
@@ -33,7 +40,7 @@ const getAllIssues = async (req: Request, res: Response) => {
     }
 
     const data = await issueService.getAllIssues({
-      ...(sort && { sort }),
+      ...(sort && { sort: sort as "newest" | "oldest" }),
       ...(type && { type }),
       ...(status && { status }),
     });
@@ -43,9 +50,7 @@ const getAllIssues = async (req: Request, res: Response) => {
       data,
     });
   } catch (error: unknown) {
-    const message =
-      error instanceof Error ? error.message : "Internal Server Error";
-    sendResponse(res, { statusCode: 500, success: false, message });
+    handleControllerError(res, error);
   }
 };
 
@@ -69,9 +74,7 @@ const getIssueById = async (
       data,
     });
   } catch (error: unknown) {
-    const message =
-      error instanceof Error ? error.message : "Internal Server Error";
-    sendResponse(res, { statusCode: 500, success: false, message });
+    handleControllerError(res, error);
   }
 };
 
@@ -127,9 +130,7 @@ const createIssue = async (req: Request, res: Response) => {
       data,
     });
   } catch (error: unknown) {
-    const message =
-      error instanceof Error ? error.message : "Internal Server Error";
-    sendResponse(res, { statusCode: 500, success: false, message });
+    handleControllerError(res, error);
   }
 };
 
@@ -228,9 +229,7 @@ const updateIssue = async (
       data,
     });
   } catch (error: unknown) {
-    const message =
-      error instanceof Error ? error.message : "Internal Server Error";
-    sendResponse(res, { statusCode: 500, success: false, message });
+    handleControllerError(res, error);
   }
 };
 
@@ -253,9 +252,7 @@ const deleteIssue = async (
       message: "Issue deleted successfully",
     });
   } catch (error: unknown) {
-    const message =
-      error instanceof Error ? error.message : "Internal Server Error";
-    sendResponse(res, { statusCode: 500, success: false, message });
+    handleControllerError(res, error);
   }
 };
 

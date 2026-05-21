@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { authService } from "./auth.service.js";
-import sendResponse from "../../utility/sendResponse.js";
+import sendResponse, { handleControllerError } from "../../utility/sendResponse.js";
 import { UserRoleEnum, type UserRole } from "./auth.interface.js";
 
 const signup = async (req: Request, res: Response) => {
@@ -36,11 +36,7 @@ const signup = async (req: Request, res: Response) => {
       data,
     });
   } catch (error: unknown) {
-    const statusCode =
-      (error as { statusCode?: number }).statusCode ?? 500;
-    const message =
-      error instanceof Error ? error.message : "Internal Server Error";
-    sendResponse(res, { statusCode, success: false, message });
+    handleControllerError(res, error);
   }
 };
 
@@ -67,11 +63,7 @@ const login = async (req: Request, res: Response) => {
       data,
     });
   } catch (error: unknown) {
-    const statusCode =
-      (error as { statusCode?: number }).statusCode ?? 500;
-    const message =
-      error instanceof Error ? error.message : "Internal Server Error";
-    sendResponse(res, { statusCode, success: false, message });
+    handleControllerError(res, error);
   }
 };
 
