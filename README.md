@@ -34,14 +34,14 @@ An internal tech issue and feature tracker for development teams. Contributors c
 ### Installation
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/devpulse.git
-cd devpulse/backend
+git clone https://github.com/Sakebul-islam/Assignment-2.git
+cd Assignment-2
 npm install
 ```
 
 ### Environment Variables
 
-Create a `.env` file in the `backend/` directory:
+Create a `.env` file in the `/Assignment-2` directory:
 
 ```env
 PORT=5000
